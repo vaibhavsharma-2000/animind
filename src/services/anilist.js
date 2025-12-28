@@ -226,10 +226,10 @@ export async function fetchGenres() {
     }
 }
 
-export async function fetchAnimeByGenre(genre) {
+export async function fetchAnimeByGenre(genre, perPage = 5) {
     const query = `
-    query ($genre: String) {
-        Page(perPage: 4) {
+    query ($genre: String, $perPage: Int) {
+        Page(perPage: $perPage) {
             media(genre: $genre, sort: POPULARITY_DESC, type: ANIME) {
                 id
                 title {
@@ -254,7 +254,7 @@ export async function fetchAnimeByGenre(genre) {
             },
             body: JSON.stringify({
                 query,
-                variables: { genre }
+                variables: { genre, perPage }
             })
         });
 

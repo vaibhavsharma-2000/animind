@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Layout from './Layout';
 import AnimeCard from './AnimeCard';
 import { fetchGenres, fetchAnimeByGenre } from '../services/anilist';
@@ -59,7 +60,7 @@ const Genres = () => {
                                         : 'col-span-1 row-span-1 bg-white/5 hover:bg-anime-red/20 hover:border-anime-red/50 hover:scale-[1.02] active:scale-95'}
                                 `}
                                 style={{
-                                    gridRowEnd: isExpanded ? 'span 5' : 'auto' // More height for the content
+                                    gridRowEnd: isExpanded ? 'span 4' : 'auto' // Reduced from 5 to 4 to fix padding
                                 }}
                             >
                                 {/* UNEXPANDED CONTENT */}
@@ -114,9 +115,9 @@ const Genres = () => {
                                         )}
 
                                         <div className="mt-auto pt-4 flex justify-end">
-                                            <button className="text-sm font-bold text-anime-gray hover:text-white uppercase tracking-widest flex items-center gap-1 transition-colors">
+                                            <Link to={`/genre/${genre}`} className="text-sm font-bold text-anime-gray hover:text-white uppercase tracking-widest flex items-center gap-1 transition-colors">
                                                 View All {genre} <ChevronRight size={14} />
-                                            </button>
+                                            </Link>
                                         </div>
 
                                     </div>

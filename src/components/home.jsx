@@ -4,6 +4,7 @@ import Layout from './Layout';
 import AnimeCard from './AnimeCard';
 import { fetchTrendingAnime, fetchAnimeByTitles } from '../services/anilist';
 import { getAnimeRecommendations } from '../services/gemini';
+import Hero from './Hero';
 
 function Home() {
     const [animeList, setAnimeList] = useState([]);
@@ -58,9 +59,8 @@ function Home() {
     return (
         <Layout onSearch={handleSearch}>
             {/* Hero Section */}
-            <div className="mb-8 p-8 rounded-2xl bg-gradient-to-r from-anime-red/20 to-transparent border border-anime-red/20">
-                <h1 className="text-4xl text-white font-bold mb-2">Welcome to AniMind.</h1>
-                <p className="text-anime-gray">Trending globally right now (Powered by AniList).</p>
+            <div className="mb-20">
+                <Hero />
             </div>
 
             {/* 3. The Grid or Error */}

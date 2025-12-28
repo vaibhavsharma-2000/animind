@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Layout from './Layout';
 import { getLibrary } from '../services/library';
 import { getUser, setUser as saveUser } from '../services/user';
@@ -124,7 +125,11 @@ const Profile = () => {
                         <div className="space-y-6">
                             {library.length > 0 ? (
                                 library.map((anime) => (
-                                    <div key={anime.id} className="group bg-anime-card border border-white/5 rounded-2xl p-4 flex gap-6 hover:border-anime-red/30 transition-all duration-300 hover:bg-white/5">
+                                    <Link
+                                        to={`/anime/${anime.id}`}
+                                        key={anime.id}
+                                        className="group bg-anime-card border border-white/5 rounded-2xl p-4 flex gap-6 hover:border-anime-red/30 transition-all duration-300 hover:bg-white/5 block"
+                                    >
                                         {/* Image */}
                                         <div className="w-24 h-32 flex-shrink-0 relative rounded-lg overflow-hidden">
                                             <img
@@ -161,7 +166,7 @@ const Profile = () => {
                                                 <span className="ml-2 text-xs font-bold tracking-wider text-white/50">MASTERPIECE</span>
                                             </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 ))
                             ) : (
                                 <div className="text-anime-gray text-center py-20 border border-dashed border-white/10 rounded-2xl bg-white/5">

@@ -7,6 +7,7 @@ import Library from './components/Library';
 import AnimeDetail from './components/AnimeDetail';
 import Profile from './components/Profile';
 import Genres from './components/Genres';
+import GenreView from './components/GenreView';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
 
         {/* Route 4: Genres Page */}
         <Route path="/genres" element={<Genres />} />
+        <Route path="/genre/:genre" element={<GenreView />} />
 
         {/* Route 3: Library Page */}
         <Route path="/library" element={<Library />} />
