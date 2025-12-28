@@ -1,16 +1,115 @@
-# React + Vite
+#🔴 ANIMIND: AI-Powered Anime Discovery
+AniMind is a next-generation anime discovery platform that bridges the gap between Visuals and Data. Unlike traditional databases that rely only on text search, AniMind uses Google's Gemini 1.5 Flash AI to "see" art styles and recommend anime based on visual vibes.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Built with a high-fidelity Cyberpunk aesthetic, it leverages the AniList API for real-time data and Local Storage for a frictionless, login-free user experience.
 
-Currently, two official plugins are available:
+🔗 [Live Demo on Vercel](https://animind-v2.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##✨ Key Features
 
-## React Compiler
+###👁️ "Vision" Search (AI-Powered)
+The crown jewel of AniMind. Users can upload a screenshot, fan art, or any image. The app sends the image to Gemini 1.5 Flash, which analyzes the color palette, art style, and atmosphere to recommend 5 similar anime titles.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Tech: Gemini Multimodal API + AniList GraphQL.
 
-## Expanding the ESLint configuration
+###🧠 Smart Autocomplete
+A "Web 3.0" search bar that predicts what you are looking for.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Debounced Input: Prevents API spam by waiting for the user to stop typing.
+
+Visual Dropdown: Displays micro-cards (Poster + Year + Format) instantly.
+
+Search History: Remembers your last 5 searches using Local Storage.
+
+###📂 The "Data Dossier" (Details Page)
+A rich, immersive detail view designed like a futuristic system interface.
+
+Dynamic Routing: URL-based routing (/anime/:id) allows for easy sharing.
+
+Visual Recommendations: Uses AniList's recommendation engine to populate a "Vibe Match" section.
+
+Stats Grid: Displays score, studio, episodes, and status in a clean grid.
+
+###🍱 Expanding Genre Grid
+A "Bento Box" style interactive grid for browsing categories.
+
+CSS Grid Spanning: Clicking a genre expands the card to fill the row, revealing top anime in that category without leaving the page.
+
+###💾 Frictionless Library & Profile
+No Login Required: Uses persistent Local Storage to create a "Guest Profile."
+
+Library: Users can add anime to their "Watching" or "Completed" lists.
+
+Profile: Tracks user stats and recent activity automatically.
+
+##🛠️ Tech Stack
+Frontend Framework: React (Vite) for blazing fast performance.
+
+Styling: Tailwind CSS (Custom color config for the Neon Red/Dark theme).
+
+AI Model: Google Gemini 2.5 Flash (via Google Generative AI SDK).
+
+Data API: AniList GraphQL API.
+
+Routing: React Router DOM v6.
+
+Icons: Lucide React.
+
+Deployment: Vercel.
+
+##🏗️ System Architecture
+AniMind uses a Hybrid API Approach to get the best of both worlds: Intelligence and Accuracy.
+
+The Brain (Gemini): Used for fuzzy logic, natural language understanding, and image analysis. It returns raw string data (e.g., "Cyberpunk Edgerunners, Akira").
+
+The Database (AniList): The app takes the strings from Gemini and queries AniList to get the "Hard Data" (Posters, ID, Synopsis, Ratings).
+
+The Memory (Local Storage): Saves user preferences and library data directly in the browser.
+
+Code snippet
+
+graph TD;
+    User-->|Uploads Image| UI;
+    UI-->|Sends Image| GeminiAPI;
+    GeminiAPI-->|Returns Titles| UI;
+    UI-->|Queries Titles| AniListAPI;
+    AniListAPI-->|Returns Metadata| UI;
+    UI-->|Renders Cards| User;
+
+## 🚀 Getting Started Locally
+Follow these steps to run the "Neural Network" on your local machine.
+
+### 1. Clone the Repository
+Bash
+
+git clone https://github.com/vaibhavsharma-2000/animind.git
+cd animind
+### 2. Install Dependencies
+Bash
+
+npm install
+### 3. Configure Environment Keys
+Create a .env file in the root directory. You will need a Google Gemini API Key (Free tier available at Google AI Studio).
+
+Code snippet
+
+VITE_GEMINI_API_KEY=your_actual_api_key_here
+### 4. Run the Development Server
+Bash
+
+npm run dev
+Open http://localhost:5173 to view the app.
+
+##🛡️ Security Note
+This project uses client-side API calls. The API Key is stored in .env and injected via Vite. For production, the key is secured via Vercel Environment Variables to ensure it is not exposed in the public repository.
+
+##🔮 Future Roadmap
+[ ] Voice Search: allowing users to ask for recommendations verbally.
+
+[ ] Trailer Integration: Embedding YouTube trailers in the Data Dossier.
+
+
+##🤝 Contact
+Created by Vaibhav Sharma - Frontend Developer + UX Designer + AI Enthusiast
+
+[LinkedIn](https://www.linkedin.com/in/vaibhavsharma2000/) | [Portfolio Github](https://github.com/vaibhavsharma-2000) | [Portfolio Behance](https://www.behance.net/vaibhavsharma2000)
