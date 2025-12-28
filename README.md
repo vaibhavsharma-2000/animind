@@ -1,18 +1,18 @@
-#🔴 ANIMIND: AI-Powered Anime Discovery
+# 🔴 ANIMIND: AI-Powered Anime Discovery
 AniMind is a next-generation anime discovery platform that bridges the gap between Visuals and Data. Unlike traditional databases that rely only on text search, AniMind uses Google's Gemini 1.5 Flash AI to "see" art styles and recommend anime based on visual vibes.
 
 Built with a high-fidelity Cyberpunk aesthetic, it leverages the AniList API for real-time data and Local Storage for a frictionless, login-free user experience.
 
 🔗 [Live Demo on Vercel](https://animind-v2.vercel.app/)
 
-##✨ Key Features
+## ✨ Key Features
 
-###👁️ "Vision" Search (AI-Powered)
+### 👁️ "Vision" Search (AI-Powered)
 The crown jewel of AniMind. Users can upload a screenshot, fan art, or any image. The app sends the image to Gemini 1.5 Flash, which analyzes the color palette, art style, and atmosphere to recommend 5 similar anime titles.
 
 Tech: Gemini Multimodal API + AniList GraphQL.
 
-###🧠 Smart Autocomplete
+### 🧠 Smart Autocomplete
 A "Web 3.0" search bar that predicts what you are looking for.
 
 Debounced Input: Prevents API spam by waiting for the user to stop typing.
@@ -21,7 +21,7 @@ Visual Dropdown: Displays micro-cards (Poster + Year + Format) instantly.
 
 Search History: Remembers your last 5 searches using Local Storage.
 
-###📂 The "Data Dossier" (Details Page)
+### 📂 The "Data Dossier" (Details Page)
 A rich, immersive detail view designed like a futuristic system interface.
 
 Dynamic Routing: URL-based routing (/anime/:id) allows for easy sharing.
@@ -30,19 +30,19 @@ Visual Recommendations: Uses AniList's recommendation engine to populate a "Vibe
 
 Stats Grid: Displays score, studio, episodes, and status in a clean grid.
 
-###🍱 Expanding Genre Grid
+### 🍱 Expanding Genre Grid
 A "Bento Box" style interactive grid for browsing categories.
 
 CSS Grid Spanning: Clicking a genre expands the card to fill the row, revealing top anime in that category without leaving the page.
 
-###💾 Frictionless Library & Profile
+### 💾 Frictionless Library & Profile
 No Login Required: Uses persistent Local Storage to create a "Guest Profile."
 
 Library: Users can add anime to their "Watching" or "Completed" lists.
 
 Profile: Tracks user stats and recent activity automatically.
 
-##🛠️ Tech Stack
+## 🛠️ Tech Stack
 Frontend Framework: React (Vite) for blazing fast performance.
 
 Styling: Tailwind CSS (Custom color config for the Neon Red/Dark theme).
@@ -57,7 +57,7 @@ Icons: Lucide React.
 
 Deployment: Vercel.
 
-##🏗️ System Architecture
+## 🏗️ System Architecture
 AniMind uses a Hybrid API Approach to get the best of both worlds: Intelligence and Accuracy.
 
 The Brain (Gemini): Used for fuzzy logic, natural language understanding, and image analysis. It returns raw string data (e.g., "Cyberpunk Edgerunners, Akira").
@@ -100,16 +100,16 @@ Bash
 npm run dev
 Open http://localhost:5173 to view the app.
 
-##🛡️ Security Note
+## 🛡️ Security Note
 This project uses client-side API calls. The API Key is stored in .env and injected via Vite. For production, the key is secured via Vercel Environment Variables to ensure it is not exposed in the public repository.
 
-##🔮 Future Roadmap
+## 🔮 Future Roadmap
 [ ] Voice Search: allowing users to ask for recommendations verbally.
 
 [ ] Trailer Integration: Embedding YouTube trailers in the Data Dossier.
 
 
-##🤝 Contact
+## 🤝 Contact
 Created by Vaibhav Sharma - Frontend Developer + UX Designer + AI Enthusiast
 
 [LinkedIn](https://www.linkedin.com/in/vaibhavsharma2000/) | [Portfolio Github](https://github.com/vaibhavsharma-2000) | [Portfolio Behance](https://www.behance.net/vaibhavsharma2000)
