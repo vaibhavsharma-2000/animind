@@ -1,5 +1,9 @@
 # 🔴 ANIMIND: AI-Powered Anime Discovery
-AniMind is a next-generation anime discovery platform that bridges the gap between Visuals and Data. Unlike traditional databases that rely only on text search, AniMind uses Google's Gemini 1.5 Flash AI to "see" art styles and recommend anime based on visual vibes.
+A next-generation discovery platform that bridges the gap between Human Engineering and Artificial Intelligence.
+
+Conceptually designed as a "Letterboxd for Anime," AniMind goes beyond standard databases by integrating Google Gemini 2.5 Flash to "see" and analyze anime art styles. This project is a fusion of my personal knowledge in JavaScript, React, and System Architecture with the raw generative power of AI—creating a seamless experience where users can discover content based on visual "vibes" rather than just text tags.
+
+Built With: React 18, Vite, Tailwind CSS, Framer Motion, Google Generative AI, AniList GraphQL.
 
 Built with a high-fidelity Cyberpunk aesthetic, it leverages the AniList API for real-time data and Local Storage for a frictionless, login-free user experience.
 
