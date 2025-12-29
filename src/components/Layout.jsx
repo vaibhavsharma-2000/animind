@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Menu, User, Bell, ScanEye } from 'lucide-react';
+import { Search, Menu, User, Bell, ScanEye, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { getUser } from '../services/user';
 import SearchBar from './SearchBar';
 import Notifications from './Notifications';
 
 const Layout = ({ children, onSearch }) => {
     const location = useLocation();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
     // Helper to check active state
     // Helper to check active state
@@ -59,8 +61,11 @@ const Layout = ({ children, onSearch }) => {
                                 </div>
                             </Link>
 
-                            <button className="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all">
-                                <Menu size={24} />
+                            <button
+                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                className="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all relative z-50"
+                            >
+                                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                             </button>
                         </div>
 
@@ -81,6 +86,58 @@ const Layout = ({ children, onSearch }) => {
                 <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-anime-glow/5 rounded-full blur-[150px] mix-blend-screen" />
                 <div className="absolute top-[40%] left-[20%] w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-[100px] mix-blend-screen" />
             </div>
+
+            {/* MOBILE MENU DRAWER */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        className="fixed inset-0 z-40 bg-anime-black/95 backdrop-blur-xl pt-24 px-6 md:hidden"
+                    >
+                        <div className="flex flex-col space-y-6">
+                            <Link
+                                to="/"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="text-2xl font-bold text-white hover:text-anime-red transition-colors"
+                            >
+                                Home
+                            </Link>
+                            <Link
+                                to="/discover"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="text-2xl font-bold text-white hover:text-anime-red transition-colors flex items-center gap-2"
+                            >
+                                <ScanEye size={24} /> Vision
+                            </Link>
+                            <Link
+                                to="/genres"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="text-2xl font-bold text-white hover:text-anime-red transition-colors"
+                            >
+                                Genres
+                            </Link>
+                            <Link
+                                to="/library"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="text-2xl font-bold text-white hover:text-anime-red transition-colors"
+                            >
+                                Library
+                            </Link>
+
+                            {/* Mobile Search - Visible only here if needed, or rely on top bar search */}
+                            <div className="pt-8 border-t border-white/10">
+                                <div className="text-anime-gray text-sm uppercase tracking-widest mb-4">Quick Search</div>
+                                <SearchBar onSearch={(q) => {
+                                    onSearch(q);
+                                    setIsMobileMenuOpen(false);
+                                }} />
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };

@@ -144,7 +144,7 @@ const AnimeDetail = () => {
                     {/* RIGHT COLUMN: DATA DOSSIER */}
                     <div className="flex-1">
                         {/* TITLE BLOCK */}
-                        <h1 className="text-5xl md:text-7xl font-display font-black text-white leading-none mb-2 tracking-tight">
+                        <h1 className="text-3xl md:text-7xl font-display font-black text-white leading-none mb-2 tracking-tight">
                             {anime.title.english || anime.title.romaji}
                         </h1>
                         <h2 className="text-xl text-anime-gray font-body font-light mb-8">

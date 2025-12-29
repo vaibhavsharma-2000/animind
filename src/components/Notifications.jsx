@@ -50,7 +50,7 @@ const Notifications = () => {
 
             {/* DROPDOWN */}
             {isOpen && (
-                <div className="absolute right-0 mt-3 w-80 bg-anime-card border border-anime-red/20 rounded-xl shadow-2xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 backdrop-blur-3xl">
+                <div className="fixed left-4 right-4 top-20 md:absolute md:right-0 md:left-auto md:top-auto md:mt-3 md:w-80 bg-anime-card border border-anime-red/20 rounded-xl shadow-2xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 backdrop-blur-3xl">
 
                     {/* HEADER */}
                     <div className="p-4 border-b border-white/5 flex justify-between items-center bg-white/5">

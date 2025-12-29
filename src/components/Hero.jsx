@@ -45,11 +45,11 @@ const Hero = () => {
 
             {/* CONTENT */}
             <div className="relative z-10 flex flex-col items-center text-center px-4">
-                <h1 className="text-8xl md:text-[10rem] font-display font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-anime-gray/50 select-none">
+                <h1 className="text-5xl md:text-[10rem] font-display font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-anime-gray/50 select-none">
                     ANIMIND
                 </h1>
                 <p className="text-anime-gray text-xl md:text-2xl mt-4 max-w-2xl font-light">
-                    The Neural Network for Anime Discovery.
+                    Discover your next favorite Anime.
                 </p>
 
                 {/* Decorative Grid Pattern (Optional but matches aesthetic) */}

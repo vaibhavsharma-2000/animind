@@ -48,7 +48,7 @@ const Library = () => {
 
                 {/* CONTENT */}
                 {matchCount > 0 ? (
-                    <div className="w-full max-w-7xl grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-6 animate-in fade-in slide-in-from-bottom-5 duration-700">
+                    <div className="w-full max-w-7xl grid grid-cols-2 md:grid-cols-5 lg:grid-cols-6 gap-6 animate-in fade-in slide-in-from-bottom-5 duration-700">
                         {filteredLibrary.map((anime) => (
                             <AnimeCard
                                 key={anime.id}

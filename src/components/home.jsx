@@ -77,7 +77,7 @@ function Home() {
                 // Simple loading text while we wait
                 <div className="text-anime-glow animate-pulse">Gathering info...</div>
             ) : (
-                <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-6 gap-4">
                     {animeList.map((anime) => (
                         <AnimeCard
                             key={anime.id}
