@@ -83,7 +83,11 @@ const SearchBar = ({ onSearch }) => {
     const handleEnter = (e) => {
         if (e.key === 'Enter') {
             setIsOpen(false);
-            if (onSearch) onSearch(query);
+            if (onSearch) {
+                onSearch(query);
+            } else {
+                navigate(`/?q=${encodeURIComponent(query)}`);
+            }
         }
     }
 

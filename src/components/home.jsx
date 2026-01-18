@@ -1,5 +1,6 @@
 // src/components/Home.jsx
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Layout from './Layout';
 import AnimeCard from './AnimeCard';
 import { fetchTrendingAnime, fetchAnimeByTitles } from '../services/anilist';
@@ -7,6 +8,7 @@ import { getAnimeRecommendations } from '../services/gemini';
 import Hero from './Hero';
 
 function Home() {
+    const [searchParams] = useSearchParams();
     const [animeList, setAnimeList] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [error, setError] = useState(null); // New error state
@@ -43,18 +45,27 @@ function Home() {
 
 
     // 2. The "Effect" - Run this when the page loads
+    // 2. The "Effect" - Run this when the page loads
+    const q = searchParams.get('q');
+
     useEffect(() => {
         async function loadData() {
-            try {
-                const data = await fetchTrendingAnime();
-                setAnimeList(data);
-                setLoading(false);
-            } catch (e) {
-                console.error(e);
+            if (q) {
+                // If there is a query param, perform search
+                await handleSearch(q);
+            } else {
+                // Otherwise load trending
+                try {
+                    const data = await fetchTrendingAnime();
+                    setAnimeList(data);
+                    setLoading(false);
+                } catch (e) {
+                    console.error(e);
+                }
             }
         }
         loadData();
-    }, []);
+    }, [q]);
 
     return (
         <Layout onSearch={handleSearch}>
