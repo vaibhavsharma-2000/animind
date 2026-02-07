@@ -81,16 +81,40 @@ const Profile = () => {
                                 <span className="w-1 h-6 bg-anime-red rounded-full"></span>
                                 Favorite Vibes
                             </h3>
-                            <div className="flex flex-wrap gap-2">
-                                {['Cyberpunk', 'Mecha', 'Horror', 'Psychological', 'Dystopian'].map(tag => (
-                                    <span key={tag} className={`
-                                        px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-default
-                                        ${tag === 'Cyberpunk' ? 'bg-anime-red text-white shadow-lg shadow-anime-red/20' : 'bg-white/5 text-anime-gray border border-white/5 hover:border-anime-red/30 hover:text-white'}
-                                    `}>
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
+                            {(() => {
+                                // Compute top genres from library
+                                const genreCounts = {};
+                                library.forEach(anime => {
+                                    (anime.genres || []).forEach(genre => {
+                                        genreCounts[genre] = (genreCounts[genre] || 0) + 1;
+                                    });
+                                });
+                                const topGenres = Object.entries(genreCounts)
+                                    .sort((a, b) => b[1] - a[1])
+                                    .slice(0, 5)
+                                    .map(([genre]) => genre);
+
+                                if (topGenres.length === 0) {
+                                    return (
+                                        <p className="text-anime-gray text-sm opacity-70">
+                                            Add anime to your library to discover your favorite vibes!
+                                        </p>
+                                    );
+                                }
+
+                                return (
+                                    <div className="flex flex-wrap gap-2">
+                                        {topGenres.map((tag, i) => (
+                                            <span key={tag} className={`
+                                                px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-default
+                                                ${i === 0 ? 'bg-anime-red text-white shadow-lg shadow-anime-red/20' : 'bg-white/5 text-anime-gray border border-white/5 hover:border-anime-red/30 hover:text-white'}
+                                            `}>
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                );
+                            })()}
                         </div>
 
                         {/* Top Studios */}
@@ -99,19 +123,43 @@ const Profile = () => {
                                 <span className="w-1 h-6 bg-anime-red rounded-full"></span>
                                 Top Studios
                             </h3>
-                            <div className="space-y-4">
-                                {['Studio Trigger', 'Madhouse', 'Sunrise'].map((studio, i) => (
-                                    <div key={studio} className="flex items-center justify-between text-sm">
-                                        <span className="text-gray-400 font-medium">{studio}</span>
-                                        <div className="w-24 h-1.5 bg-white/10 rounded-full overflow-hidden">
-                                            <div
-                                                className="h-full bg-anime-red rounded-full"
-                                                style={{ width: `${80 - (i * 15)}%` }}
-                                            />
-                                        </div>
+                            {(() => {
+                                // Compute top studios from library
+                                const studioCounts = {};
+                                library.forEach(anime => {
+                                    if (anime.studio) {
+                                        studioCounts[anime.studio] = (studioCounts[anime.studio] || 0) + 1;
+                                    }
+                                });
+                                const topStudios = Object.entries(studioCounts)
+                                    .sort((a, b) => b[1] - a[1])
+                                    .slice(0, 3);
+                                const maxCount = topStudios.length > 0 ? topStudios[0][1] : 0;
+
+                                if (topStudios.length === 0) {
+                                    return (
+                                        <p className="text-anime-gray text-sm opacity-70">
+                                            Add anime to your library to see your top studios!
+                                        </p>
+                                    );
+                                }
+
+                                return (
+                                    <div className="space-y-4">
+                                        {topStudios.map(([studio, count]) => (
+                                            <div key={studio} className="flex items-center justify-between text-sm">
+                                                <span className="text-gray-400 font-medium">{studio}</span>
+                                                <div className="w-24 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                                    <div
+                                                        className="h-full bg-anime-red rounded-full"
+                                                        style={{ width: `${(count / maxCount) * 100}%` }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
+                                );
+                            })()}
                         </div>
                     </div>
 

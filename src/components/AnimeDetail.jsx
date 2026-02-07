@@ -66,6 +66,12 @@ const AnimeDetail = () => {
     const recommendations = anime.recommendations?.nodes?.map(n => n.mediaRecommendation) || [];
     const studioConfig = anime.studios?.nodes?.length > 0 ? anime.studios.nodes[0].name : 'Unknown Data';
 
+    // Calculate seasons count from relations (PREQUEL + SEQUEL + 1 for current)
+    const relatedSeasons = anime.relations?.edges?.filter(
+        edge => edge.node.type === 'ANIME' && (edge.relationType === 'SEQUEL' || edge.relationType === 'PREQUEL')
+    ) || [];
+    const seasonsCount = relatedSeasons.length > 0 ? relatedSeasons.length + 1 : 1;
+
     return (
         <Layout>
             {/* BACKGROUND LAYER */}
@@ -152,9 +158,10 @@ const AnimeDetail = () => {
                         </h2>
 
                         {/* STATS GRID */}
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
                             <StatBox label="Format" value={anime.format} />
                             <StatBox label="Episodes" value={anime.episodes || 'unknown'} />
+                            <StatBox label="Seasons" value={seasonsCount} />
                             <StatBox label="Year" value={anime.seasonYear || 'TBA'} />
                             <StatBox label="Studio" value={studioConfig} />
                         </div>

@@ -6,7 +6,10 @@ const AnimeCard = ({ id, title, image, match, status }) => {
     return (
         // Wrap everything in the Link component
         <Link to={`/anime/${id}`}>
-            <div className="group relative rounded-lg overflow-hidden bg-anime-card cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_#f80000] hover:ring-1 hover:ring-anime-glow">
+            <div
+                title={title}
+                className="group relative rounded-lg overflow-hidden bg-anime-card cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_#f80000] hover:ring-1 hover:ring-anime-glow"
+            >
 
                 {/* ... Keep all your existing Image and Badge code here ... */}
                 <div className="aspect-[2/3] w-full relative">

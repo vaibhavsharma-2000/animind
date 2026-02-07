@@ -1,15 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Bell, Check } from 'lucide-react';
+import { getNotifications, markAllRead as markAllReadService } from '../services/notifications';
 
 const Notifications = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [notifications, setNotifications] = useState([
-        { id: 1, text: "System: Welcome to the AniMind Network.", time: "2m ago", read: false },
-        { id: 2, text: "New Episode: One Piece Ep 1100 is trending.", time: "1h ago", read: false },
-        { id: 3, text: "Library: 'Cyberpunk: Edgerunners' added successfully.", time: "1d ago", read: true }
-    ]);
+    const [notifications, setNotifications] = useState([]);
 
     const wrapperRef = useRef(null);
+
+    // Load notifications on mount and listen for updates
+    useEffect(() => {
+        setNotifications(getNotifications());
+
+        // Listen for new notifications
+        const handleNewNotification = () => {
+            setNotifications(getNotifications());
+        };
+
+        window.addEventListener('notification-added', handleNewNotification);
+        return () => {
+            window.removeEventListener('notification-added', handleNewNotification);
+        };
+    }, []);
 
     // Filter unread count
     const unreadCount = notifications.filter(n => !n.read).length;
@@ -28,7 +40,7 @@ const Notifications = () => {
     }, [wrapperRef]);
 
     const handleMarkAllRead = () => {
-        const updated = notifications.map(n => ({ ...n, read: true }));
+        const updated = markAllReadService();
         setNotifications(updated);
     };
 

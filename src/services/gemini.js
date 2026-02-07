@@ -13,13 +13,15 @@ export async function getAnimeRecommendations(userVibe) {
     const ai = new GoogleGenAI({ apiKey: API_KEY });
 
     try {
-        const prompt = `Recommend 15 anime titles based on this vibe: "${userVibe}". 
+        const prompt = `Recommend 20 anime titles based on this vibe: "${userVibe}". 
+    First priority: Recommend the most accurate and relevant anime that match this vibe.
+    Second priority: Include currently trending/popular anime that also fit the vibe.
     Return ONLY a comma-separated list of titles. Example: "Naruto, Bleach, One Piece". 
     Do not add numbering, bullet points, or extra text.`;
 
         // Correct API call for @google/genai
         const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
+            model: "gemini-3-flash-preview",
             contents: prompt,
         });
 
@@ -78,15 +80,17 @@ export async function analyzeImageVibe(imageFile) {
         const imagePart = await fileToGenerativePart(imageFile);
 
         const prompt = `
-      Analyze the art style, color palette, and atmosphere of this anime image.
-      Based on the visual style, recommend 5 specific anime titles that look similar.
+      First, try to identify the exact anime this image is from. If you can identify it, include that anime title FIRST in your response.
       
-      Strict Output Format: Just a comma-separated list of titles. 
-      Example: Cyberpunk: Edgerunners, Akira, Ghost in the Shell
+      Then, analyze the art style, color palette, and atmosphere of this anime image.
+      Based on the visual style and themes, recommend 5 additional specific anime titles that look similar or share similar vibes.
+      
+      Strict Output Format: Just a comma-separated list of titles (identified anime first if recognized, then similar ones).
+      Example: Cyberpunk: Edgerunners, Akira, Ghost in the Shell, Psycho-Pass, Ergo Proxy
     `;
 
         const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
+            model: "gemini-3-flash-preview",
             contents: [
                 {
                     parts: [

@@ -159,7 +159,7 @@ query ($id: Int) {
         name
       }
     }
-    recommendations(sort: RATING_DESC, perPage: 4) {
+    recommendations(sort: RATING_DESC, perPage: 6) {
       nodes {
         mediaRecommendation {
           id
@@ -171,6 +171,15 @@ query ($id: Int) {
             large
           }
           averageScore
+        }
+      }
+    }
+    relations {
+      edges {
+        relationType
+        node {
+          id
+          type
         }
       }
     }

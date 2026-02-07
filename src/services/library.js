@@ -1,3 +1,5 @@
+import { notifyAnimeAdded, notifyStatusChanged } from './notifications';
+
 // 1. Get the current list from browser memory
 export function getLibrary() {
     const stored = localStorage.getItem('anime-library');
@@ -18,12 +20,18 @@ export function addToLibrary(anime, initialStatus = 'Watching') {
         id: anime.id,
         title: anime.title.english || anime.title.romaji,
         image: anime.coverImage.extraLarge,
+        genres: anime.genres || [],
+        studio: anime.studios?.nodes?.[0]?.name || null,
         status: initialStatus,
         addedAt: new Date().toISOString()
     };
 
     library.push(entry);
     localStorage.setItem('anime-library', JSON.stringify(library));
+
+    // Trigger notification
+    notifyAnimeAdded(entry.title, initialStatus);
+
     return true; // Success
 }
 
@@ -38,8 +46,15 @@ export function updateStatus(id, newStatus) {
     const index = library.findIndex(item => item.id === parseInt(id));
 
     if (index !== -1) {
+        const oldStatus = library[index].status;
         library[index].status = newStatus;
         localStorage.setItem('anime-library', JSON.stringify(library));
+
+        // Trigger notification only if status actually changed
+        if (oldStatus !== newStatus) {
+            notifyStatusChanged(library[index].title, oldStatus, newStatus);
+        }
+
         return true;
     }
     return false;
