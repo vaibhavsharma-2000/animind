@@ -125,11 +125,11 @@ const AnimeDetail = () => {
                                 onChange={handleStatusChange}
                                 className="w-full bg-anime-card border border-anime-red/30 text-white p-3 rounded font-body focus:border-anime-red outline-none appearance-none cursor-pointer hover:bg-white/5 transition-colors"
                             >
-                                <option value="" disabled>Set Watch Status...</option>
-                                <option value="Watching">Watching</option>
-                                <option value="Completed">Completed</option>
-                                <option value="Plan to Watch">Plan to Watch</option>
-                                <option value="Dropped">Dropped</option>
+                                <option value="" disabled className="bg-[#1a1a2e] text-white">Set Watch Status...</option>
+                                <option value="Watching" className="bg-[#1a1a2e] text-white">Watching</option>
+                                <option value="Completed" className="bg-[#1a1a2e] text-white">Completed</option>
+                                <option value="Plan to Watch" className="bg-[#1a1a2e] text-white">Plan to Watch</option>
+                                <option value="Dropped" className="bg-[#1a1a2e] text-white">Dropped</option>
                             </select>
 
                             <button
